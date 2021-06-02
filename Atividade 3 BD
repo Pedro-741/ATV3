@@ -1,0 +1,61 @@
+/*ATIVIDADE 3 DE PROJETO DE BANCO DE DADOS*/
+
+/*1 QUESTÃO*/
+
+DELIMITER $$
+CREATE PROCEDURE insere_aluno(IN cod_curso INTEGER,IN dat_nasc DATE,IN tot_cred INTEGER,IN mgp DOUBLE,IN nom_alun VARCHAR(80),IN email VARCHAR(40)) 
+ BEGIN
+	INSERT INTO aluno (cod_curso, dat_nasc, tot_cred, mgp, nom_alun, email)
+    values (cod_curso, dat_nasc, tot_cred, mgp, nom_alun, email);
+    if row_count() = 1 then
+    select nom_alun from aluno;
+    end if;
+ END $$
+ DELIMITER ;
+ 
+ call insere_aluno(5, '1999-7-19', 60, 8.75, 'pedro', 'pedrovinicius741@hotmail.com');
+
+/*TÉRMINO DA QUESTÃO 1*/
+
+/*---------------------------------------------------*/
+
+/* 2 QUESTÃO */
+
+DELIMITER //
+CREATE PROCEDURE acumula()
+BEGIN
+declare contador tinyint unsigned default 1;
+declare str varchar(30) default "";
+WHILE contador < 6 DO
+	set str = concat(str, contador, ",");
+    SET contador = contador + 1;
+END WHILE;
+select str;
+END//
+DELIMITER ;
+
+CALL acumula();
+
+/*TÉRMINO DA QUESTÃO 2*/
+
+/**-------------------------------------------------------**/
+
+/*3 QUESTÃO*/
+
+delimiter $$
+create procedure acumula_repetidor()
+begin
+	declare result  varchar (30) default "";
+    declare somador int default 1  ;
+    repeat
+		set result = concat(result, somador, "," );
+        set somador = somador + 1;
+        until somador > 9
+    end repeat;
+    select result;
+end $$
+delimiter ; 
+
+call acumula_repetidor();
+
+/*TÉRMINO DA QUESTÃO 3*/
